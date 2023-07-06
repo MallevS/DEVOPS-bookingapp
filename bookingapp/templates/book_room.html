@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <title>Book a Room!</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+
+    .form-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+
+    .form-label {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+        margin-bottom: 20px;
+    }
+
+    .btn-submit {
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 20px;
+        background-color: #007bff;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="form-title">Book Room: {{ room.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="capacity" class="form-label">Capacity:</label>
+            <input type="number" name="capacity" class="form-control" required>
+        </div>
+        <div class="form-group">
+        <label for="employees" class="fs-5">Select Employees:</label>
+        <select name="employees" multiple class="form-control">
+            {% for employee in employees %}
+                <option value="{{ employee.id }}">{{ employee.username }}</option>
+            {% endfor %}
+        </select>
+    </div>
+        <div class="form-group">
+            <label for="start_time" class="form-label">Start Time:</label>
+            <input type="datetime-local" name="start_time" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="end_time" class="form-label">End Time:</label>
+            <input type="datetime-local" name="end_time" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-submit">Book</button>
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

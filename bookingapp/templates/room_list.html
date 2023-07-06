@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <title>Room List</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center p-3">Room List</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 p-5">
+        {% for room in rooms %}
+        <div class="col">
+            <div class="card border-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ room.name }}</h5>
+                    <p class="card-text">Capacity: {{ room.capacity }}</p>
+                    <p class="card-text">Availability: {{ room.booking_set.count }}</p>
+                    {% if room.booking_set.exists %}
+        <p class="card-text">Start Time: {{ room.booking_set.first.start_time }}</p>
+                {% endif %}
+                    <p class="card-text">Employees:
+        {% if room.booking_set.all %}
+            {% for booking in room.booking_set.all %}
+                {% for user in booking.user.all %}
+                    {{ user.username }}
+                {% endfor %}
+            {% empty %}
+                No employees booked yet.
+            {% endfor %}
+        {% else %}
+            No employees booked yet.
+        {% endif %}
+    </p>
+    </p>
+                    {% if request.user.is_staff %}
+                    <a href="{% url 'book_room' room.id %}" class="btn btn-primary">Book</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
