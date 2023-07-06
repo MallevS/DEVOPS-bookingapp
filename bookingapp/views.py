@@ -7,13 +7,13 @@ from .models import Room, Booking
 
 # Create your views here.
 
-@login_required()
+#@login_required()
 def room_list(request):
     rooms = Room.objects.all()
     return render(request, 'room_list.html', {'rooms': rooms})
 
 
-@login_required
+#@login_required
 def book_room(request, room_id):
     room = get_object_or_404(Room, id=room_id)
     employees = User.objects.all()

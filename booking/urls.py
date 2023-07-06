@@ -20,7 +20,7 @@ from bookingapp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
     path('', room_list, name='room_list'),
     path('book/<int:room_id>/', book_room, name='book_room'),
 ]

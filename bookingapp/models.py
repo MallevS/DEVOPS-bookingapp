@@ -35,4 +35,4 @@ class Booking(models.Model):
     end_time = models.DateTimeField()
 
     def __str__(self):
-        return self.room
+        return str(self.room)
