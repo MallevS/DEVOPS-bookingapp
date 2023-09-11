@@ -7,3 +7,4 @@ platformdirs==3.5.1
 sqlparse==0.4.4
 tzdata==2023.3
 virtualenv==20.23.0
+psycopg2-binary==2.9.1
