@@ -16,12 +16,18 @@ spec:
     spec:
       containers:
         - name: my-app-container
-          image: postgres:latest
+          image: malevs/proekt:latest
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_DB
+              value: postgress
+            - name: POSTGRES_PASSWORD
+              value: postgres
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
           envFrom:
             - configMapRef:
                 name: my-app-config
             - secretRef:
                 name: my-app-secrets
-
